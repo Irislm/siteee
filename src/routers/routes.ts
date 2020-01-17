@@ -1,14 +1,21 @@
+import React from 'react';
+
 interface Route {
     path: string,
-    component: () => any,
+    component: any,
 }
 
 const routes: Route[] = [{
     path: '/reading',
-    component: () => require('../pages/Reading'),
+    component: () => import('../pages/Reading'),
 }, {
     path: '/',
-    component: () => require('../pages/Home'),
-}]
+    component: () => import('../pages/Home'),
+}].map(v => {
+    return {
+        ...v,
+        component: React.lazy(v.component)
+    }
+})
 
 export default routes;

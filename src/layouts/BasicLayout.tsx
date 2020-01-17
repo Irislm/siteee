@@ -22,7 +22,7 @@ export default ({
               </li>
             </ul>
           </nav>
-          {children()}
+          {children}
         </div>
     )
 }

@@ -12,10 +12,12 @@ class Router extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-            {routes.map(v => (
-              <Route path={v.path} key={v.path}>
+            {routes.map(({ path, component: Component }) => (
+              <Route path={path} key={path}>
                 <BasicLayout>
-                  {v.component().default}
+                  <React.Suspense fallback={null}>
+                    <Component />
+                  </React.Suspense>
                 </BasicLayout>
               </Route>
             ))}
@@ -26,3 +28,4 @@ class Router extends React.Component {
 }
 
 export default Router;
+ 
